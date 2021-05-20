@@ -27,7 +27,11 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        Modal Body
+                        <p>
+                            <a class="btn btn-success" href="{% url 'concluir_tarefa' tarefa.id %}">Concluír</a>
+                            <a class="btn btn-danger" href="{% url 'excluir_tarefa' tarefa.id %}">Excluir</a>
+                            <a class="btn btn-warning" href="{% url 'adiar_tarefa' tarefa.id %}">Adiar</a>
+                        </p>
                     </div>
                 </div>
             </div>
