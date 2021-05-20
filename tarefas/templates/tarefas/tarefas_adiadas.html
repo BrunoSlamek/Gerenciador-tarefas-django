@@ -1,19 +1,11 @@
-{% extends 'base.html' %} {% load crispy_forms_tags %}{% block title %} Tarefas pendentes {% endblock %} {% block content %}
+{% extends 'base.html' %}{% block title %} Tarefas adiadas {% endblock %} {% block content %}
 
 <div class="h-100 p-5 bg-light border rounded-3">
 
-    <h1>Adicionar Tarefa</h1>
-    <form method="POST">
-        {% csrf_token %} {{ form|crispy }}
-        <br>
-        <input class="btn btn-success" type="submit" value="Salvar">
-    </form>
+    <h1>Tarefas adiadas</h1>
     <hr>
-
-    <h1>Tarefas pendentes: </h1>
-
     <div class="list-group">
-        {% for tarefa in tarefas_pendentes %}
+        {% for tarefa in tarefas_adiadas %}
         <button type="button" class="list-group-item list-group-item-action" data-bs-toggle="modal" data-bs-target="#modal{{ tarefa.id }}">
                 <h5> {{ tarefa.descricao }}</h5>
                 <small>Prioridade: {{ tarefa.categoria }}</small>
@@ -30,17 +22,19 @@
                     </div>
                     <div class="modal-body">
                         <p>
-                            <a class="btn btn-success" href="{% url 'concluir_tarefa' tarefa.id %}">Concluír</a>
+                            <a class="btn btn-success" href="{% url 'mover_para_tarefas' tarefa.id%}">Mover para tarefas</a>
                             <a class="btn btn-danger" href="{% url 'excluir_tarefa' tarefa.id %}">Excluir</a>
-                            <a class="btn btn-warning" href="{% url 'adiar_tarefa' tarefa.id %}">Adiar</a>
                             <a class="btn btn-primary" href="{% url 'editar_tarefa' tarefa.id %}">Editar</a>
                         </p>
                     </div>
                 </div>
             </div>
         </div>
+        {% empty %}
+        <h2>
+            Nenhuma tarefa foi adiada
+        </h2>
         {% endfor %}
     </div>
-
 </div>
 {% endblock %}
